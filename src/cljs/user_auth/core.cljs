@@ -40,9 +40,14 @@
    [:img {:src "/img/warning_clojure.png"}]])
 
 (defn home-page []
-  [:section.section>div.container>div.content
-   (when-let [docs @(rf/subscribe [:docs])]
-     [:div {:dangerouslySetInnerHTML {:__html (md->html docs)}}])])
+  [:div "Check out our sign in page ^^"])
+  ; [:section.section>div.container>div.content
+  ;  (when-let [docs @(rf/subscribe [:docs])]
+  ;    [:div {:dangerouslySetInnerHTML {:__html (md->html docs)}}
+  ;     ])])
+
+
+
 
 
 
@@ -122,14 +127,19 @@
   (let [email-address (r/atom nil)
         password (r/atom nil)]
     (fn []
-      [:div.signup-wrapper
-       [:h2 "Please sign in"
-        [:form
+      [:div.container
+       [:div.content-body
+        [:h1 "Please Sign In"
+         [:div.box
+          [:form
          ;;[email-input email-address]
-         [email-form email-address]
-         [password-form password]
-         [:p "email = " @email-address]
-         [:p "password = " @password]]]]))
+           [email-form email-address]
+           [password-form password]]
+          [:p "email = " @email-address]
+          [:p "password = " @password]
+          [:button "Login"]
+          [:button "Sign Up?"]]
+         ]]]))
   )
 
 (def pages
