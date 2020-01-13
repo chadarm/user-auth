@@ -32,7 +32,8 @@
       {:class (when @expanded? :is-active)}
       [:div.navbar-start
        [nav-link "#/" "Home" :home]
-       [nav-link "#/about" "About" :about]]]]))
+       [nav-link "#/about" "About" :about]
+       [nav-link "#/sign-in" "Sign In" :sign-in]]]]))
 
 (defn about-page []
   [:section.section>div.container>div.content
@@ -43,7 +44,9 @@
    (when-let [docs @(rf/subscribe [:docs])]
      [:div {:dangerouslySetInnerHTML {:__html (md->html docs)}}])])
 
-(defn sign-in-page)
+(defn sign-in-page []
+  [:h1 "Hello"]
+  )
 
 (def pages
   {:home #'home-page
@@ -61,7 +64,8 @@
 (def router
   (reitit/router
     [["/" :home]
-     ["/about" :about]]))
+     ["/about" :about]
+     ["/sign-in" :sign-in]]))
 
 ;; -------------------------
 ;; History
