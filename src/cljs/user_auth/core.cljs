@@ -44,8 +44,92 @@
    (when-let [docs @(rf/subscribe [:docs])]
      [:div {:dangerouslySetInnerHTML {:__html (md->html docs)}}])])
 
+
+
+
+
+
+
+(defn generic-prompt 
+  "A message that will pop-up to help user know what input is expected"
+  [message]
+  [:div.mymessages
+   [:div.prompt-messages
+    [:em message]]]) ;;TODO - change font size to be smaller? or something to make this stand out less
+
+
+
+
+(defn input-element 
+  "An input element that takes in what type of element it is, and the current value that will change with input."
+  [id name type value in-focus]
+  [:input {:id id
+           :name name
+           :class "form-control"
+           :type type
+           :required ""
+           :value @value
+           :on-change #(reset! value (-> % .-target .-value))
+           ;; Below we change the whether the input is focused on or not
+           :on-focus #(swap! in-focus not)
+           :on-blur #(swap! in-focus not)
+           }])
+
+
+(defn email-input [email-address-atom]
+  [input-element "email" "email" "email" email-address-atom])
+
+
+
+(defn input-and-prompt
+  "Input-element mixed with a generic-prompt"
+  [label-value input-name input-type input-element-arg prompt-element]
+  (let [input-focus (r/atom false)]
+    (fn []
+      [:div
+       [:label label-value]
+       (if @input-focus prompt-element [:div])
+       [input-element input-name input-name input-type input-element-arg input-focus]])))
+
+(defn email-form [email-address-atom]
+  (input-and-prompt "Email:"
+                    "email"
+                    "email"
+                    email-address-atom
+                    [generic-prompt "What's your email?"]))
+
+(defn password-form [password-atom]
+  (input-and-prompt "Password:"
+                    "password"
+                    "password"
+                    password-atom
+                    [generic-prompt "Enter your password"]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (defn sign-in-page []
-  [:h1 "Hello"]
+  (let [email-address (r/atom nil)
+        password (r/atom nil)]
+    (fn []
+      [:div.signup-wrapper
+       [:h2 "Please sign in"
+        [:form
+         ;;[email-input email-address]
+         [email-form email-address]
+         [password-form password]
+         [:p "email = " @email-address]
+         [:p "password = " @password]]]]))
   )
 
 (def pages
