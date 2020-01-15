@@ -12,6 +12,7 @@
                  [cljs-ajax "0.8.0"]
                  [clojure.java-time "0.3.2"]
                  [com.cognitect/transit-clj "0.8.319"]
+                 [com.layerware/hugsql "0.5.1"] ;; added in hugsql from base 
                  [conman "0.8.4"]
                  [cprop "0.1.15"]
                  [day8.re-frame/http-fx "0.1.6"]
@@ -34,7 +35,7 @@
                  [org.webjars.npm/bulma "0.8.0"]
                  [org.webjars.npm/material-icons "0.3.1"]
                  [org.webjars/webjars-locator "0.38"]
-                 [org.xerial/sqlite-jdbc "3.28.0"]
+                 [org.xerial/sqlite-jdbc "3.28.0"] ;; hugsql needs this, was here from project build I did not add it
                  [re-frame "0.10.9"]
                  [reagent "0.9.0-rc3"]
                  [ring-webjars "0.2.0"]

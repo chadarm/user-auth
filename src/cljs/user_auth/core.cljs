@@ -1,15 +1,16 @@
 (ns user-auth.core
   (:require
-    [day8.re-frame.http-fx]
-    [reagent.core :as r]
-    [re-frame.core :as rf]
-    [goog.events :as events]
-    [goog.history.EventType :as HistoryEventType]
-    [markdown.core :refer [md->html]]
-    [user-auth.ajax :as ajax]
-    [user-auth.events]
-    [reitit.core :as reitit]
-    [clojure.string :as string])
+   [day8.re-frame.http-fx]
+   [reagent.core :as r]
+   [re-frame.core :as rf]
+   [goog.events :as events]
+   [goog.history.EventType :as HistoryEventType]
+   [markdown.core :refer [md->html]]
+   [user-auth.ajax :as ajax]
+   [user-auth.events]
+   [reitit.core :as reitit]
+   [clojure.string :as string]
+   [user-auth.db.general-con :as db])
   (:import goog.History))
 
 (defn nav-link [uri title page]
@@ -115,9 +116,13 @@
 
 
 
+(defn sign-up-button 
+  "Signs up a new user using a hugsql call"
+  [username pass]
+  db/create-new-user username pass)
 
-
-
+(defn login-button []
+  )
 
 
 
@@ -129,7 +134,7 @@
     (fn []
       [:div.container
        [:div.content-body
-        [:h1 "Please Sign In"
+        [:h1 "Please Sign In" ;; this isn't big for some reason
          [:div.box
           [:form
          ;;[email-input email-address]
