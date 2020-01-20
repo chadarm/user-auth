@@ -3,23 +3,33 @@
 -- :command :execute
 -- :result :raw
 -- :doc Create users table
-create table users (
-    id              VARCHAR(20) PRIMARY KEY,
-    username        VARCHAR(30),
+create table users ( 
+    username        VARCHAR(30) PRIMARY KEY,
     pass            VARCHAR(30));
 
 
+-- :name drop-users-table :!
+-- :doc Drop users table if exists
+drop table if exists users
 
 
 
 
-
--- :name sign-up-new-user
+-- :name sign-up-new-user! :! :n
 -- :doc Creates a new user in the database
-INSERT INTO users
-(username, pass)
-VALUES (:username, :pass)
+INSERT INTO users (username, pass)
+VALUES (:username, :pass);
 
+
+-- :name get-user :? :1
+-- :doc retrieves a user record given the id
+SELECT * FROM users
+WHERE username = :username;
+
+
+-- :name get-users :? :*
+-- :doc retrieves a user record given the id
+SELECT * FROM users;
 
 
 
@@ -38,24 +48,3 @@ VALUES (:username, :pass)
 
 
 
--- :name create-user! :! :n
--- :doc creates a new user record
-INSERT INTO users
-(id, first_name, last_name, email, pass)
-VALUES (:id, :first_name, :last_name, :email, :pass)
-
--- :name update-user! :! :n
--- :doc updates an existing user record
-UPDATE users
-SET first_name = :first_name, last_name = :last_name, email = :email
-WHERE id = :id
-
--- :name get-user :? :1
--- :doc retrieves a user record given the id
-SELECT * FROM users
-WHERE id = :id
-
--- :name delete-user! :! :n
--- :doc deletes a user record given the id
-DELETE FROM users
-WHERE id = :id

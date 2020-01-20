@@ -10,7 +10,8 @@
    [user-auth.events]
    [reitit.core :as reitit]
    [clojure.string :as string]
-   [user-auth.db.general-con :as db])
+   ;[user-auth.db.general-con :as db]
+   )
   (:import goog.History))
 
 (defn nav-link [uri title page]
@@ -119,7 +120,8 @@
 (defn sign-up-button 
   "Signs up a new user using a hugsql call"
   [username pass]
-  db/create-new-user username pass)
+  ;db/create-new-user username pass
+  )
 
 (defn login-button []
   )
@@ -190,5 +192,6 @@
   
   (ajax/load-interceptors!)
   (rf/dispatch [:fetch-docs])
+  ;(db/initialize-db)
   (hook-browser-navigation!)
   (mount-components))
